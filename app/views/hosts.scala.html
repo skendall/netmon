@@ -1,0 +1,104 @@
+@()
+
+@main("Netmonics") {
+
+<!DOCTYPE html>
+    <html ng-app>
+    <head>
+        <title>Netmonics</title>
+        <link href="assets/css/bootstrap.css" rel="stylesheet" media="screen">
+        <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="assets/css/bootstrap-lightbox.min.css" rel="stylesheet">
+        <script src="assets/js/angular.js"></script>
+        <script src="assets/js/angular-resource.js"></script>
+        <script src="assets/js/jquery.js"></script>
+        <script src="assets/js/bootstrap.js"></script>
+        <script src="assets/js/bootstrap-lightbox.min.js"></script>
+        <script src="assets/js/host.js"></script>
+    </head>
+    <body>
+        <div ng-controller="HostCtrl" ng-init="hosts = []">
+
+        <section id="hosts">
+
+                <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>URL</th>
+                                    <th>Type</th>
+                                    <th>Port</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="host in hosts">
+                                    <td>
+                                        <div contentEditable="true" ng-model="url">{{host.url}}</div>
+                                    </td>
+                                    <td>
+                                        <div>{{host.type}}</div>
+                                    </td>
+                                    <td>
+                                        <div>{{host.port}}</div>
+                                    </td>
+                                    <td>
+                                        <div>{{host.status}}</div>
+                                    </td>
+                                    <td>
+                                        <i class="icon-repeat"></i> <i class="icon-edit"></i> <i class="icon-remove" ng-click="removeHost($index)"></i>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                </table>
+                <span ng-if="hosts.length == 0">
+                    <center>No hosts configured.</center>
+                </span>
+
+            <center>
+                        <ul class="nav nav-tabs">
+                            <a data-toggle="modal" role="button" class="btn" href="#addHostModal">Add</a>
+                        </ul>
+                </center>
+
+            <div id="addHostModal" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myModalLabel">Add Host</h3>
+                </div>
+
+                <div class="modal-body">
+                    <div class="table">
+                        <div>
+                            <span>URL</span>
+                            <span><input type="text" ng-model="url" size="30"/></span>
+                        </div>
+                        <div>
+                            <span>Type</span>
+                            <span><input type="text" ng-model="type" size="30"/></span>
+                        </div>
+                        <div>
+                            <span>Port</span>
+                            <span><input type="text" ng-model="port" size="30"/></span>
+                        </div>
+                        <div>
+                            <span>Response Code</span>
+                            <span><input type="text" ng-model="responseCode" size="30"/></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                    <button class="btn btn-primary" data-dismiss="modal" ng-click="addHost()">Save</button>
+                </div>
+
+            </div>
+        </section>
+
+        </div>
+
+    </body>
+</html>
+
+}
